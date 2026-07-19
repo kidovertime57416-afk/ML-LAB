@@ -1,3 +1,4 @@
+from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 import seaborn as sns
 import numpy as np
@@ -80,3 +81,20 @@ print("\n--- หลังทำ Data Cleaning ---")
 print(f"จำนวนข้อมูลคงเหลือ: {df_cleaned.shape[0]} แถว")
 print(f"ค่าว่างในคอลัมน์ Year หลังแก้: {df_cleaned['Year'].isnull().sum()} ค่า")
 print(f"ค่าว่างในคอลัมน์ Publisher หลังแก้: {df_cleaned['Publisher'].isnull().sum()} ค่า")
+
+#Feature Engineering
+#1.Label Encoding
+le = LabelEncoder()
+df_cleaned['Genre_LabelEncoded'] = le.fit_transform(df_cleaned['Genre'])
+
+print("--- ผลลัพธ์การทำ Label Encoding ---")
+print(df_cleaned[['Genre', 'Genre_LabelEncoded']].drop_duplicates().head(10))
+print("-" * 30)
+
+#2.One-Hot Encoding
+df_onehot = pd.get_dummies(df_cleaned, columns=['Platform'], prefix='Platform', drop_first=True)
+
+print("\n--- ผลลัพธ์การทำ One-Hot Encoding ---")
+platform_cols = [col for col in df_onehot.columns if col.startswith('Platform_')]
+print(df_onehot[['Name'] + platform_cols[:5]].head())
+print("-" * 30)
