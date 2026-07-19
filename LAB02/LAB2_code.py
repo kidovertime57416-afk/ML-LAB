@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 #Dataset Exploration
 #1.Load Dataset
-df = pd.read_csv(r"C:\Users\Kidovertime\Desktop\ML\LAB01\vgsales.csv")
+df = pd.read_csv(r"C:\Users\Kidovertime\Desktop\ML\LAB01\LAB02\dataset.csv")
 
 #2.Display Shape
 print("\n------------------------------")
