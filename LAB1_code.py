@@ -1,7 +1,9 @@
 import pandas as pd
 import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
 
+#Dataset Exploration
 #1.Load Dataset
 df = pd.read_csv(r"C:\Users\Kidovertime\Desktop\ML\LAB01\vgsales.csv")
 
@@ -29,6 +31,7 @@ print(df.duplicated().sum())
 print("\n------------------------------")
 print(df['Genre'].value_counts())
 
+#Data Visualization
 # 1. Histogram
 plt.figure(figsize=(8, 5))
 sns.histplot(df['Global_Sales'], bins=50, kde=True)
@@ -43,3 +46,37 @@ numeric_cols = df.select_dtypes(include=[np.number])
 sns.heatmap(numeric_cols.corr(), annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Correlation Heatmap')
 plt.show()
+
+#Data Cleaning
+# 1. Duplicate Removal
+df_cleaned = df.drop_duplicates().copy()
+
+print("--- ก่อนทำ Data Cleaning ---")
+print(f"จำนวนข้อมูลทั้งหมด: {df.shape[0]} แถว")
+print(f"ค่าว่างในคอลัมน์ Year: {df['Year'].isnull().sum()} ค่า")
+print(f"ค่าว่างในคอลัมน์ Publisher: {df['Publisher'].isnull().sum()} ค่า")
+print(f"จำนวนแถวที่ซ้ำซ้อน: {df.duplicated().sum()} แถว")
+print("-" * 30)
+
+# 2. Data Type Conversion & Incorrect Data Correction
+df_cleaned['Year'] = pd.to_numeric(df_cleaned['Year'], errors='coerce')
+
+# 3. Missing Value Handling & Compare
+mean_year = df_cleaned['Year'].mean()
+median_year = df_cleaned['Year'].median()
+
+print("\n[เปรียบเทียบสถิติสำหรับคอลัมน์ Year]")
+print(f"ค่าเฉลี่ย (Mean Year): {mean_year:.2f}")
+print(f"ค่ามัธยฐาน (Median Year): {median_year:.1f}")
+
+df_cleaned['Year'] = df_cleaned['Year'].fillna(median_year)
+
+df_cleaned['Year'] = df_cleaned['Year'].astype(int)
+
+mode_publisher = df_cleaned['Publisher'].mode()[0]
+df_cleaned['Publisher'] = df_cleaned['Publisher'].fillna(mode_publisher)
+
+print("\n--- หลังทำ Data Cleaning ---")
+print(f"จำนวนข้อมูลคงเหลือ: {df_cleaned.shape[0]} แถว")
+print(f"ค่าว่างในคอลัมน์ Year หลังแก้: {df_cleaned['Year'].isnull().sum()} ค่า")
+print(f"ค่าว่างในคอลัมน์ Publisher หลังแก้: {df_cleaned['Publisher'].isnull().sum()} ค่า")
