@@ -1,0 +1,4 @@
+﻿cluster,mpg,cylinders,displacement,horsepower,weight,acceleration,model_year,member count
+0,19.8,6.1,219.3,102.8,3234.9,16.3,76.0,95
+1,14.5,8.0,349.7,162.1,4154.5,12.6,73.5,95
+2,29.4,4.0,109.7,78.2,2303.0,16.5,77.1,202
