@@ -19,7 +19,7 @@
 
 ## Project Structure
 
-`	ext
+```text
 mini-proj/
 │
 ├── main.py                            # สคริปต์หลักสำหรับรันกระบวนการทั้งหมด (End-to-End Pipeline 7 ขั้นตอน)
@@ -46,7 +46,7 @@ mini-proj/
     ├── comparison_configs.png         # กราฟเปรียบเทียบประสิทธิภาพแต่ละ Configuration
     ├── comparison_epochs.png          # กราฟเปรียบเทียบความแม่นยำตามจำนวน Epochs
     └── lab_06_summary_report.md       # สรุปตารางผลการทดลองเปรียบเทียบสำหรับ Lab 06
-`
+```
 
 ---
 
