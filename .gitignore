@@ -1,3 +1,4 @@
 ﻿LAB03/age_gender.csv
 *.npy
 !LAB05 - SVM/mini-proj/outputs/X_train.npy
+LAB06 - NN/mini-proj/outputs/*.npy

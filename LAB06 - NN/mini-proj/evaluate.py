@@ -207,4 +207,67 @@ def plot_prediction_sample(
     plt.tight_layout()
     fig.savefig(save_path, bbox_inches="tight", dpi=200)
     plt.close(fig)
-    print(f"Saved: {save_path}")
+    print(f"Saved: {save_path}")
+
+
+def plot_config_comparison(results, save_path):
+    """Plot bar chart comparing different NN configurations (MLP layers/neurons vs CNN)."""
+    fig, ax = plt.subplots(figsize=(10, 5))
+    labels_full = [r["name"] for r in results]
+    x = np.arange(len(labels_full))
+    width = 0.25
+
+    train_bars = ax.bar(x - width, [r["train_acc"] for r in results], width, label="Train Accuracy", color="#2b5c8f")
+    val_bars = ax.bar(x, [r["val_acc"] for r in results], width, label="Val Accuracy", color="#e27c38")
+    test_bars = ax.bar(x + width, [r["test_acc"] for r in results], width, label="Test Accuracy", color="#3fa34d")
+
+    ax.set_ylabel("Accuracy (%)", fontsize=11, fontweight="bold")
+    ax.set_title("Neural Network Configuration Performance Comparison", fontsize=13, fontweight="bold", pad=12)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels_full, rotation=12, ha="right", fontsize=9, fontweight="bold")
+    ax.set_ylim(0, 105)
+    ax.grid(axis="y", linestyle="--", alpha=0.6)
+    ax.legend(loc="lower right")
+
+    for bar in test_bars:
+        h = bar.get_height()
+        ax.annotate(f"{h:.1f}%",
+                    xy=(bar.get_x() + bar.get_width() / 2, h),
+                    xytext=(0, 3), textcoords="offset points",
+                    ha="center", va="bottom", fontsize=9, fontweight="bold")
+
+    fig.tight_layout()
+    fig.savefig(save_path, dpi=150)
+    plt.close(fig)
+    print(f"Saved: {save_path}")
+
+
+def plot_epoch_comparison(results, save_path):
+    """Plot line chart comparing performance across different numbers of epochs."""
+    fig, ax = plt.subplots(figsize=(8, 4.8))
+    epochs_arr = [r["epochs"] for r in results]
+    train_accs = [r["train_acc"] for r in results]
+    val_accs = [r["val_acc"] for r in results]
+    test_accs = [r["test_acc"] for r in results]
+
+    ax.plot(epochs_arr, train_accs, marker="o", linewidth=2.2, color="#2b5c8f", label="Train Accuracy")
+    ax.plot(epochs_arr, val_accs, marker="s", linewidth=2.2, color="#e27c38", label="Validation Accuracy")
+    ax.plot(epochs_arr, test_accs, marker="^", linewidth=2.5, color="#3fa34d", label="Test Accuracy")
+
+    for x_val, y_val_pt in zip(epochs_arr, test_accs):
+        ax.annotate(f"{y_val_pt:.1f}%", xy=(x_val, y_val_pt), xytext=(0, 7),
+                    textcoords="offset points", ha="center", fontsize=10, fontweight="bold", color="#246930")
+
+    ax.set_xlabel("Number of Epochs", fontsize=11, fontweight="bold")
+    ax.set_ylabel("Accuracy (%)", fontsize=11, fontweight="bold")
+    ax.set_title("Performance Comparison Across Different Epochs (CNN Model)", fontsize=13, fontweight="bold", pad=12)
+    ax.set_xticks(epochs_arr)
+    ax.set_ylim(40, 105)
+    ax.grid(True, linestyle="--", alpha=0.6)
+    ax.legend(loc="lower right")
+
+    fig.tight_layout()
+    fig.savefig(save_path, dpi=150)
+    plt.close(fig)
+    print(f"Saved: {save_path}")
+
