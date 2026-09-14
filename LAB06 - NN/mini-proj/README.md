@@ -1,4 +1,5 @@
 # Mini-Project: Neural Network Image Classification (Lion vs Tiger)
+**Version:** 4.1.0
 
 ## Project Overview
 โปรเจกต์นี้เป็นการพัฒนาระบบจำแนกรูปภาพสัตว์ (Tiger vs Lion) ด้วยโครงข่ายประสาทเทียม **Neural Network (Feedforward NN / Multi-Layer Perceptron - MLP)** โดยครอบคลุมกระบวนการ Machine Learning Pipeline แบบครบวงจร ตั้งแต่การโหลดรูปภาพ, การประมวลผลเบื้องต้น (Preprocessing), การแบ่งชุดข้อมูล (Train/Val/Test Split), การสร้างและเทรนโมเดล Neural Network, การประเมินประสิทธิภาพโมเดล (Evaluation), การทดลองเปรียบเทียบสถาปัตยกรรมโมเดลและจำนวน Epochs ตามข้อกำหนดของใบงาน **ML-LAB-06**, ตลอดจนการทดสอบการทำนายผลลัพธ์ (Inference & Visualization)

@@ -211,7 +211,7 @@ def plot_prediction_sample(
 
 
 def plot_config_comparison(results, save_path):
-    """Plot bar chart comparing different NN configurations (MLP layers/neurons vs CNN)."""
+    """Plot bar chart comparing different NN configurations (MLP layers/neurons)."""
     fig, ax = plt.subplots(figsize=(10, 5))
     labels_full = [r["name"] for r in results]
     x = np.arange(len(labels_full))
@@ -260,7 +260,7 @@ def plot_epoch_comparison(results, save_path):
 
     ax.set_xlabel("Number of Epochs", fontsize=11, fontweight="bold")
     ax.set_ylabel("Accuracy (%)", fontsize=11, fontweight="bold")
-    ax.set_title("Performance Comparison Across Different Epochs (CNN Model)", fontsize=13, fontweight="bold", pad=12)
+    ax.set_title("Performance Comparison Across Different Epochs (Neural Network)", fontsize=13, fontweight="bold", pad=12)
     ax.set_xticks(epochs_arr)
     ax.set_ylim(40, 105)
     ax.grid(True, linestyle="--", alpha=0.6)

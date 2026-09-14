@@ -27,7 +27,7 @@ def preprocess_image(image, img_size=100):
 def to_features(images):
     """(n, h, w, 3) uint8 -> the array the model consumes.
 
-    A CNN keeps the 2D shape, so unlike the SVM version nothing is flattened.
+    The model uses a Rescaling layer and Flatten layer directly on 2D image arrays.
 
     Data stays uint8 on purpose: the 0-1 scaling is a Rescaling layer inside
     the model instead. float32 RGB would be 4x the memory (720 MB for 6,000

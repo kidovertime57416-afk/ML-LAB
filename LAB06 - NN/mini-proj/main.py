@@ -37,7 +37,7 @@ BATCH_SIZE = 32
 
 
 def plot_config_comparison(results, save_path):
-    """Plot bar chart comparing different NN configurations (MLP layers/neurons vs CNN)."""
+    """Plot bar chart comparing different NN configurations (MLP layers/neurons)."""
     fig, ax = plt.subplots(figsize=(10, 5))
     labels_full = [r["name"] for r in results]
     x = np.arange(len(labels_full))

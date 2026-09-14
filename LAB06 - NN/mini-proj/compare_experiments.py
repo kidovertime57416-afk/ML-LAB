@@ -1,7 +1,7 @@
 """ML-LAB-06 Experimentation & Comparison Script.
 
 Compares:
-1. Different Neural Network configurations (MLP vs CNN, varying layers/neurons).
+1. Different Neural Network configurations (varying hidden layers and neurons).
 2. Different numbers of epochs (10, 20, 30, 50).
 Generates comparison summary tables and visualization charts for Lab 06.
 """
