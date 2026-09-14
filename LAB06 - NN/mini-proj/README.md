@@ -1,7 +1,7 @@
 # Mini-Project: Neural Network Image Classification (Lion vs Tiger)
 
-## Project Overview 
-โปรเจกต์นี้เป็นการพัฒนาระบบจำแนกรูปภาพสัตว์ (Tiger vs Lion) ด้วยโครงข่ายประสาทเทียม **Neural Network (NN)** และ **Convolutional Neural Network (CNN)** โดยครอบคลุมกระบวนการ Machine Learning Pipeline แบบครบวงจร ตั้งแต่การโหลดรูปภาพ, การประมวลผลเบื้องต้น (Preprocessing), การแบ่งชุดข้อมูล (Train/Val/Test Split), การสร้างและเทรนโมเดล, การประเมินประสิทธิภาพโมเดล (Evaluation), การทดลองเปรียบเทียบสถาปัตยกรรมโมเดลและจำนวน Epochs ตามข้อกำหนดของใบงาน **ML-LAB-06**, ตลอดจนการทดสอบการทำนายผลลัพธ์ (Inference & Visualization)
+## Project Overview
+โปรเจกต์นี้เป็นการพัฒนาระบบจำแนกรูปภาพสัตว์ (Tiger vs Lion) ด้วยโครงข่ายประสาทเทียม **Neural Network (Feedforward NN / Multi-Layer Perceptron - MLP)** โดยครอบคลุมกระบวนการ Machine Learning Pipeline แบบครบวงจร ตั้งแต่การโหลดรูปภาพ, การประมวลผลเบื้องต้น (Preprocessing), การแบ่งชุดข้อมูล (Train/Val/Test Split), การสร้างและเทรนโมเดล Neural Network, การประเมินประสิทธิภาพโมเดล (Evaluation), การทดลองเปรียบเทียบสถาปัตยกรรมโมเดลและจำนวน Epochs ตามข้อกำหนดของใบงาน **ML-LAB-06**, ตลอดจนการทดสอบการทำนายผลลัพธ์ (Inference & Visualization)
 
 ---
 
@@ -13,7 +13,7 @@
 
 - **Code Reference :**  
   [Machine Learning Course - ML-06-NN (GitHub: aproot-en)](https://github.com/aproot-en/Machine-Learning-Course/tree/main/ML-06-NN)  
-  นำโครงสร้าง Pipeline และการออกแบบระบบจากคอร์สมา Rewrite และปรับปรุงเป็นโมเดลที่เสถียร รองรับทั้ง MLP และ CNN พร้อมทั้งเพิ่มการทดลองเปรียบเทียบ Configurations/Epochs ตามใบงาน Lab 06
+  นำโครงสร้าง Pipeline และการออกแบบระบบจากคอร์สมา Rewrite และปรับปรุงเป็นโมเดล Neural Network ที่ถูกต้องตามขอบเขต Lab 06 พร้อมทั้งเพิ่มการทดลองเปรียบเทียบ Configurations/Epochs
 
 ---
 
@@ -26,7 +26,7 @@ mini-proj/
 ├── data_loader.py                     # ฟังก์ชันสำหรับอ่านรูปภาพจากโฟลเดอร์และคัดกรองไฟล์เสีย
 ├── preprocessing.py                   # แปลงระบบสี BGR -> RGB และปรับขนาดภาพ (Resize 100x100)
 ├── split_data.py                      # แบ่งชุดข้อมูลเป็น Training, Validation และ Test Set
-├── nn_model.py                        # โครงสร้างโมเดล MLP/CNN, ฟังก์ชันเทรนโมเดล และทำนายผล
+├── nn_model.py                        # โครงสร้างโมเดล Neural Network (MLP), ฟังก์ชันเทรนโมเดล และทำนายผล
 ├── evaluate.py                        # คำนวณ Metrics, Confusion Matrix, History และ Prediction sample
 ├── compare_experiments.py             # ฟังก์ชันและสคริปต์เปรียบเทียบ Configurations และ Epochs
 ├── test_nn.py                         # สคริปต์สุ่มทดสอบโมเดลกับภาพตัวอย่าง 4 รูป
@@ -44,8 +44,7 @@ mini-proj/
     ├── training_history.png           # กราฟเปรียบเทียบ Loss และ Accuracy ตลอดการฝึกสอน
     ├── prediction_sample.png          # รูปภาพตัวอย่างการพยากรณ์พร้อมค่าความเชื่อมั่น (Confidence %)
     ├── comparison_configs.png         # กราฟเปรียบเทียบประสิทธิภาพแต่ละ Configuration
-    ├── comparison_epochs.png          # กราฟเปรียบเทียบความแม่นยำตามจำนวน Epochs
-    └── lab_06_summary_report.md       # สรุปตารางผลการทดลองเปรียบเทียบสำหรับ Lab 06
+    └── comparison_epochs.png          # กราฟเปรียบเทียบความแม่นยำตามจำนวน Epochs
 ```
 
 ---
@@ -55,7 +54,7 @@ mini-proj/
 กระบวนการทำงานของระบบแบ่งออกเป็น 7 ขั้นตอนหลัก:
 
 1. **โหลดชุดข้อมูล (Data Loading - data_loader.py)**:
-   - อ่านรูปภาพจากโฟลเดอร์ Animal/ โดยตรวจจับคลาสย่อยอัตโนมัติ (Lion, 	iger)
+   - อ่านรูปภาพจากโฟลเดอร์ Animal/ โดยตรวจจับคลาสย่อยอัตโนมัติ (Lion, tiger)
    - กรองเฉพาะไฟล์ภาพที่รองรับ (.jpg, .jpeg, .png, .bmp) และคัดกรองข้ามไฟล์ที่เสียหาย
 
 2. **เตรียมข้อมูลรูปภาพ (Preprocessing - preprocessing.py)**:
@@ -68,27 +67,31 @@ mini-proj/
      - **Validation Set (10%)**: สำหรับตรวจสอบระหว่างเทรน (46 ภาพ)
      - **Test Set (20%)**: สำหรับวัดประสิทธิภาพขั้นสุดท้าย (92 ภาพ)
 
-4. **สร้างและฝึกสอนโมเดล (Model Training - 
-n_model.py)**:
-   - ออกแบบสถาปัตยกรรม **CNN (Convolutional Neural Network)** ประกอบด้วย:
+4. **สร้างและฝึกสอนโมเดล (Model Training - nn_model.py)**:
+   - ออกแบบสถาปัตยกรรม **Pure Neural Network (MLP)** ประกอบด้วย:
      - ชั้น Rescaling(1./255) ปรับค่าพิกเซลให้อยู่ในช่วง [0, 1]
-     - ชั้น Conv2D (32, 64, 128 ฟิลเตอร์) และ MaxPooling2D สกัดฟีเจอร์เชิงพื้นที่
-     - ชั้น Dense (128 neurons) และ Dropout(0.5) เพื่อลด Overfitting
-     - ชั้น Output ด้วย Sigmoid สำหรับการจำแนกประเภท Binary
+     - ชั้น Flatten() แปลงมิติภาพขนาด 100x100x3 ให้เป็น Vector 30,000 มิติ
+     - ชั้น Dense (256 -> 128 -> 64 neurons) พร้อม Activation 'relu'
+     - ชั้น Dropout(0.3) และ L2 Regularization เพื่อลด Overfitting
+     - ชั้น Output Dense(1) ด้วย Activation 'sigmoid' สำหรับ Binary Classification
    - ฝึกสอนโมเดลด้วย Adam Optimizer พร้อม EarlyStopping และ ReduceLROnPlateau
 
 5. **ประเมินผลประสิทธิภาพ (Model Evaluation - evaluate.py)**:
    - คำนวณค่า **Accuracy, Precision, Recall, F1-Score**
    - สร้างและบันทึกภาพกราฟวิเคราะห์:
-     - **	raining_history.png**: กราฟแสดงเส้น Loss และ Accuracy เพื่อดูการลู่เข้าและการเรียนรู้
+     - **training_history.png**: กราฟแสดงเส้น Loss และ Accuracy เพื่อดูการลู่เข้าและการเรียนรู้
      - **confusion_matrix.png**: ตาราง Matrix แสดงความถูกต้องในการทำนายของแต่ละคลาส
 
 6. **การทดลองเปรียบเทียบตามใบงาน (Lab 06 Comparison Experiments - compare_experiments.py / main.py)**:
-   - **เปรียบเทียบ Configurations:** เปรียบเทียบความแตกต่างของจำนวน Hidden Layers และ Neurons (MLP 1 Layer 128N, MLP 2 Layers 256->128N, MLP 3 Layers 512->256->64N และ CNN) บันทึกลง **comparison_configs.png**
+   - **เปรียบเทียบ Configurations:** เปรียบเทียบความแตกต่างของจำนวน Hidden Layers และ Neurons:
+     - Config 1: 1 Hidden Layer `[128]`
+     - Config 2: 2 Hidden Layers `[256, 64]`
+     - Config 3: 2 Hidden Layers `[512, 128]`
+     - Config 4: 3 Hidden Layers `[256, 128, 64]`
+     - บันทึกลง **comparison_configs.png**
    - **เปรียบเทียบ Epochs:** เปรียบเทียบผลที่ 10, 20, 30, 50 Epochs บันทึกลง **comparison_epochs.png**
-   - บันทึกตารางรายงานสรุปผลลงไฟล์ **lab_06_summary_report.md**
 
-7. **ทดสอบการทำนายผลลัพธ์ (Inference & Sample Test - 	est_nn.py)**:
+7. **ทดสอบการทำนายผลลัพธ์ (Inference & Sample Test - test_nn.py)**:
    - สุ่มภาพจาก Test Set มาทดสอบและแสดงผลในรูปแบบ Grid 2x2
    - คำนวณค่าความน่าจะเป็นจริง (**Probability Confidence %**) และแสดงผลภาพพร้อมระบุสถานะ ถูกต้อง (เขียว) / ผิดพลาด (แดง) ในไฟล์ **prediction_sample.png**
 
@@ -100,19 +103,19 @@ n_model.py)**:
 
 | Configuration | สถาปัตยกรรม / Hidden Layers & Neurons | Train Acc (%) | Val Acc (%) | Test Acc (%) | เวลาฝึกสอน (s) |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| **Config 1 (1 Hidden Layer: 128N)** | 1 Layer [128] | 63.04% | 56.52% | **61.96%** | 10.4s |
-| **Config 2 (2 Hidden Layers: 256 -> 128N)** | 2 Layers [256, 128] | 60.25% | 60.87% | **60.87%** | 19.2s |
-| **Config 3 (3 Hidden Layers: 512 -> 256 -> 64N)** | 3 Layers [512, 256, 64] | 50.93% | 45.65% | **58.70%** | 36.6s |
-| **Config 4 (CNN: 32 -> 64 -> 128 + Dense 128)** | Conv32-64-128 + Dense128 | 97.52% | 86.96% | **86.96% - 95.65%** | 20.2s |
+| **Config 1 (1 Hidden Layer: 128N)** | 1 Layer `[128]` | 63.66% | 60.87% | **61.96%** | 10.2s |
+| **Config 2 (2 Hidden Layers: 256 -> 64N)** | 2 Layers `[256, 64]` | 63.35% | 63.04% | **57.61%** | 19.1s |
+| **Config 3 (2 Hidden Layers: 512 -> 128N)** | 2 Layers `[512, 128]` | 62.73% | 65.22% | **60.87%** | 37.8s |
+| **Config 4 (3 Hidden Layers: 256 -> 128 -> 64N)** | 3 Layers `[256, 128, 64]` | 62.11% | 50.00% | **61.96%** | 19.8s |
 
-### 2. ตารางเปรียบเทียบจำนวน Epochs (บนโมเดล CNN)
+### 2. ตารางเปรียบเทียบจำนวน Epochs (บนโมเดล Neural Network)
 
-| จำนวน Epochs | Train Acc (%) | Val Acc (%) | Test Acc (%) | เวลาฝึกสอน (s) |
-| :---: | :---: | :---: | :---: | :---: |
-| **10 Epochs** | 95.96% | 89.13% | **96.74%** | 10.4s |
-| **20 Epochs** | 98.45% | 86.96% | **92.39%** | 20.1s |
-| **30 Epochs** | 100.00% | 86.96% | **96.74%** | 29.4s |
-| **50 Epochs** | 100.00% | 86.96% | **92.39%** | 48.5s |
+| จำนวน Epochs | Train Acc (%) | Val Acc (%) | Test Acc (%) | Test Loss | เวลาฝึกสอน (s) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| **10 Epochs** | 55.28% | 63.04% | **56.52%** | 0.7330 | 10.3s |
+| **20 Epochs** | 56.21% | 52.17% | **63.04%** | 0.7304 | 19.9s |
+| **30 Epochs** | 54.97% | 50.00% | **51.09%** | 0.7408 | 28.8s |
+| **50 Epochs** | 64.29% | 71.74% | **52.17%** | 0.7011 | 47.7s |
 
 ---
 
@@ -122,15 +125,35 @@ n_model.py)**:
   - Python 3
 
 - **ไลบรารีและเฟรมเวิร์กหลัก (Libraries & Frameworks):**
-  - **TensorFlow / Keras:** ใช้สร้าง ฝึกสอน และประเมินผลโมเดล Neural Network (MLP & CNN)
+  - **TensorFlow / Keras:** ใช้สร้าง ฝึกสอน และประเมินผลโมเดล Neural Network (MLP: Flatten, Dense, Dropout)
   - **OpenCV (cv2):** ใช้อ่านไฟล์รูปภาพ จัดการระบบสี (BGR -> RGB) และปรับขนาดภาพ (Resize)
   - **NumPy:** ใช้จัดการและบันทึกชุดข้อมูลในรูปแบบ Array (.npy)
-  - **Scikit-Learn:** ใช้แบ่งชุดข้อมูล (	rain_test_split with stratify) และคำนวณ Metrics (ccuracy_score, classification_report, confusion_matrix)
+  - **Scikit-Learn:** ใช้แบ่งชุดข้อมูล (train_test_split with stratify) และคำนวณ Metrics (accuracy_score, classification_report, confusion_matrix)
   - **Matplotlib:** ใช้วาดและบันทึกภาพกราฟผลลัพธ์ (Training Curves, Confusion Matrix, Prediction Sample Grid, Comparison Charts)
 
 - **เทคนิคและอัลกอริทึมที่ใช้ (Key Techniques):**
-  - **Convolutional Neural Network (CNN):** สกัดฟีเจอร์เชิงพื้นที่ของภาพด้วย Conv2D และ MaxPooling2D
   - **Multi-Layer Perceptron (MLP):** โครงข่ายประสาทเทียมแบบ Fully-Connected พร้อมปรับจำนวน Hidden Layers และ Neurons
   - **Regularization:** ใช้ Dropout และ L2 Weight Decay เพื่อป้องกันการเกิด Overfitting
   - **Optimization & Callbacks:** ใช้ Adam Optimizer พร้อม EarlyStopping และ ReduceLROnPlateau
   - **Feature Scaling:** ใช้ชั้น Rescaling(1./255) ปรับสเกลค่าพิกเซลให้อยู่ในช่วง [0, 1] ภายในโมเดล
+
+---
+
+## How to Run (คำสั่งการใช้งาน)
+
+1. **รันกระบวนการทั้งหมดแบบครบวงจร (รวมการเทรน, การทดลองเปรียบเทียบ และสร้างกราฟทุกรูป):**
+   ```bash
+   python main.py
+   ```
+   *(คำสั่งนี้จะรันตั้งแต่ขั้นตอนที่ 1 ถึง 7 พร้อมบันทึกภาพผลลัพธ์ทั้ง 5 ภาพและรายงานสรุปลงใน outputs/)*
+
+2. **รันเฉพาะการทดลองเปรียบเทียบเพื่อสร้างกราฟ comparison_configs.png และ comparison_epochs.png:**
+   ```bash
+   python compare_experiments.py
+   ```
+
+3. **สุ่มทดสอบการพยากรณ์ภาพตัวอย่าง:**
+   ```bash
+   python test_nn.py
+   ```
+

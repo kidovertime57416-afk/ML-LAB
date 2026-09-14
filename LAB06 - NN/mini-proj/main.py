@@ -10,8 +10,7 @@ import numpy as np
 
 from compare_experiments import (
     run_configuration_comparison,
-    run_epoch_comparison,
-    save_lab_summary
+    run_epoch_comparison
 )
 from data_loader import load_data
 from evaluate import (
@@ -85,9 +84,7 @@ def plot_epoch_comparison(results, save_path):
         ax.annotate(f"{y_val_pt:.1f}%", xy=(x_val, y_val_pt), xytext=(0, 7),
                     textcoords="offset points", ha="center", fontsize=10, fontweight="bold", color="#246930")
 
-    ax.set_xlabel("Number of Epochs", fontsize=11, fontweight="bold")
-    ax.set_ylabel("Accuracy (%)", fontsize=11, fontweight="bold")
-    ax.set_title("Performance Comparison Across Different Epochs (CNN Model)", fontsize=13, fontweight="bold", pad=12)
+    ax.set_title("Performance Comparison Across Different Epochs (Neural Network Model)", fontsize=13, fontweight="bold", pad=12)
     ax.set_xticks(epochs_arr)
     ax.set_ylim(40, 105)
     ax.grid(True, linestyle="--", alpha=0.6)
@@ -146,11 +143,12 @@ def main():
     print(f"Testing samples   : {len(X_test)}")
 
     # Step 4: Train Primary Model
-    print("\n[Step 4] Training primary CNN model...")
+    print("\n[Step 4] Training primary Neural Network model...")
     model, history = train_model(
         X_train, y_train, X_val, y_val, len(classes),
         OUTPUT_DIR, EPOCHS, BATCH_SIZE
     )
+
     print("Training completed.")
 
     # Step 5: Prediction & Evaluation
@@ -190,19 +188,13 @@ def main():
         save_path=os.path.join(OUTPUT_DIR, "comparison_epochs.png")
     )
 
-    # 6.3 บันทึกตารางสรุปผลการทดลอง
-    save_lab_summary(
-        config_results, epoch_results,
-        save_path=os.path.join(OUTPUT_DIR, "lab_06_summary_report.md")
-    )
-
     # Step 7: Sample Testing Preview
     print("\n[Step 7] Testing model inference on random test samples...")
     test_nn(n_samples=4)
 
     print("\n" + "=" * 60)
     print("All ML-LAB-06 steps and experiments completed successfully!")
-    print(f"All generated outputs and reports saved in: {OUTPUT_DIR}")
+    print(f"All generated outputs saved in: {OUTPUT_DIR}")
     print("=" * 60)
 
 

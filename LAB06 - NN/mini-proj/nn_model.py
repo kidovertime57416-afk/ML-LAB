@@ -5,8 +5,16 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
-def build_mlp_model(input_shape, hidden_layers=(256, 128, 64), num_classes=2, dropout_rate=0.3):
-    """Build a fully-connected Neural Network (MLP) with configurable hidden layers and neurons."""
+def build_model(input_shape, num_classes=2, hidden_layers=(256, 128, 64), dropout_rate=0.3):
+    """Fully-connected Neural Network (Multi-Layer Perceptron - MLP) for Image Classification.
+    
+    Architecture:
+    - Input layer (100, 100, 3)
+    - Rescaling(1./255) to standardize pixel values to [0, 1]
+    - Flatten() to convert 2D image into 1D feature vector
+    - Hidden Dense layers with ReLU activation and Dropout regularization
+    - Output Dense layer with Sigmoid activation for binary classification
+    """
     model = keras.Sequential([
         keras.Input(shape=input_shape),
         layers.Rescaling(1.0 / 255),
@@ -31,53 +39,11 @@ def build_mlp_model(input_shape, hidden_layers=(256, 128, 64), num_classes=2, dr
     return model
 
 
-def build_cnn_model(input_shape, num_classes=2):
-    """Build a Convolutional Neural Network (CNN) for Image Recognition."""
-    model = keras.Sequential([
-        keras.Input(shape=input_shape),
-        layers.Rescaling(1.0 / 255),
-
-        # Convolutional Blocks
-        layers.Conv2D(32, (3, 3), activation="relu", padding="same"),
-        layers.MaxPooling2D((2, 2)),
-
-        layers.Conv2D(64, (3, 3), activation="relu", padding="same"),
-        layers.MaxPooling2D((2, 2)),
-
-        layers.Conv2D(128, (3, 3), activation="relu", padding="same"),
-        layers.MaxPooling2D((2, 2)),
-
-        # Dense Head
-        layers.Flatten(),
-        layers.Dense(128, activation="relu"),
-        layers.Dropout(0.5),
-
-        layers.Dense(
-            1 if num_classes == 2 else num_classes,
-            activation="sigmoid" if num_classes == 2 else "softmax"
-        ),
-    ])
-
-    model.compile(
-        optimizer=keras.optimizers.Adam(learning_rate=1e-3),
-        loss="binary_crossentropy" if num_classes == 2 else "sparse_categorical_crossentropy",
-        metrics=["accuracy"],
-    )
-    return model
-
-
-def build_model(input_shape, num_classes=2, model_type="cnn"):
-    """Factory function to build model by type ('cnn' or 'mlp')."""
-    if model_type.lower() == "mlp":
-        return build_mlp_model(input_shape, num_classes=num_classes)
-    return build_cnn_model(input_shape, num_classes=num_classes)
-
-
 def train_model(X_train, y_train, X_val, y_val, num_classes,
-                output_dir=None, epochs=30, batch_size=32, model_type="cnn"):
-    """Build, train and save the model. Returns (model, history)."""
+                output_dir=None, epochs=30, batch_size=32, hidden_layers=(256, 128, 64)):
+    """Build, train and save the Neural Network model. Returns (model, history)."""
 
-    model = build_model(X_train.shape[1:], num_classes, model_type=model_type)
+    model = build_model(X_train.shape[1:], num_classes, hidden_layers=hidden_layers)
     model.summary()
 
     callbacks = [
@@ -89,7 +55,7 @@ def train_model(X_train, y_train, X_val, y_val, num_classes,
         ),
     ]
 
-    print("\nTraining...")
+    print("\nTraining Neural Network...")
     history = model.fit(
         X_train, y_train,
         validation_data=(X_val, y_val),
@@ -121,5 +87,6 @@ def predict_model(model, X_test):
         return (probabilities.ravel() >= 0.5).astype(int)
 
     return probabilities.argmax(axis=1)
+
 
 
