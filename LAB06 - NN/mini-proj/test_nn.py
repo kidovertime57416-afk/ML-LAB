@@ -1,6 +1,7 @@
 """Test the trained model on random test images (2x2 grid).
 
-Random sample every run. Run main.py first.
+สคริปต์สำหรับสุ่มรูปภาพจากชุดทดสอบ (Test Set) มาทดลองทำนายผลด้วยโมเดล Neural Network ที่บันทึกไว้
+พร้อมแสดงผลภาพในรูปแบบ Grid 2x2 และบันทึกเป็นไฟล์ภาพ prediction_sample.png
 """
 
 import json
@@ -8,6 +9,7 @@ import os
 
 import matplotlib
 
+# กำหนด backend เพื่อบันทึกภาพลงไฟล์
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
@@ -21,24 +23,35 @@ N_SAMPLES = 4
 
 
 def test_nn(n_samples=N_SAMPLES):
+    """
+    โหลดโมเดลที่บันทึกไว้และสุ่มตัวอย่างภาพจาก Test Set มาทำนายผล
+    
+    ขั้นตอนการทำงาน:
+    1. ตรวจสอบไฟล์โมเดล nn_model.keras ในโฟลเดอร์ outputs/
+    2. โหลดไฟล์ X_test.npy, y_test.npy และ classes.json
+    3. สุ่มเลือกดัชนีรูปภาพจำนวน n_samples (4 ภาพ)
+    4. ป้อนภาพเข้าโมเดลเพื่อคำนวณค่าความน่าจะเป็น (Probability) และทำนายคลาส
+    5. พล็อตภาพและข้อความสรุป (Pred vs True พร้อม % Confidence) ลงใน Grid 2x2
+    6. บันทึกผลลัพธ์เป็นไฟล์ prediction_sample.png
+    """
     model_path = os.path.join(OUTPUT_DIR, "nn_model.keras")
     if not os.path.exists(model_path):
         print(f"Error: Model not found at {model_path}. Please run main.py first.")
         return
 
-    # Load model and test set
+    # โหลดโมเดลและชุดข้อมูลทดสอบ
     model = keras.models.load_model(model_path)
     X_test = np.load(os.path.join(OUTPUT_DIR, "X_test.npy"))
     y_test = np.load(os.path.join(OUTPUT_DIR, "y_test.npy"))
     with open(os.path.join(OUTPUT_DIR, "classes.json")) as f:
         classes = json.load(f)
 
-    # Pick random images
+    # สุ่มเลือกรูปภาพตัวอย่าง
     index = np.random.choice(len(X_test), n_samples, replace=False)
     X_sample = X_test[index]
     y_sample = y_test[index]
 
-    # Predict
+    # พยากรณ์ผลลัพธ์จากโมเดล
     probabilities = model.predict(X_sample, verbose=0)
     if probabilities.shape[-1] == 1:
         probabilities = probabilities.ravel()
@@ -48,7 +61,7 @@ def test_nn(n_samples=N_SAMPLES):
         predictions = probabilities.argmax(axis=1)
         confidence = probabilities.max(axis=1)
 
-    # Show results in a grid
+    # จัดเตรียมโครงสร้างภาพ Grid สำหรับแสดงผล
     cols = int(np.ceil(np.sqrt(n_samples)))
     rows = int(np.ceil(n_samples / cols))
     fig, axes = plt.subplots(rows, cols, figsize=(3.8 * cols, 4.2 * rows))
@@ -92,4 +105,5 @@ def test_nn(n_samples=N_SAMPLES):
 
 if __name__ == "__main__":
     test_nn()
+
 
