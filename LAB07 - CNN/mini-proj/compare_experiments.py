@@ -1,0 +1,231 @@
+import json
+import os
+import time
+
+import matplotlib
+
+matplotlib.use("Agg")
+
+import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+from evaluate import plot_config_comparison, plot_epoch_comparison
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
+
+
+def set_seed(seed=42):
+    """ตั้งค่า random seed สำหรับ NumPy และ TensorFlow"""
+    np.random.seed(seed)
+    tf.random.set_seed(seed)
+
+
+def build_config_1_cnn_1layer(input_shape):
+    """Config 1: 1 Conv Layer (32 Filters) + 1 Dense Layer (64 Neurons)"""
+    return keras.Sequential([
+        keras.Input(shape=input_shape),
+        layers.Rescaling(1.0 / 255),
+        layers.Conv2D(32, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Flatten(),
+        layers.Dense(64, activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.Dropout(0.2),
+        layers.Dense(1, activation="sigmoid")
+    ], name="Config_1_CNN_1Conv_32F_64N")
+
+
+def build_config_2_cnn_2layer(input_shape):
+    """Config 2: 2 Conv Layers (32 -> 64 Filters) + 1 Dense Layer (128 Neurons)"""
+    return keras.Sequential([
+        keras.Input(shape=input_shape),
+        layers.Rescaling(1.0 / 255),
+        layers.Conv2D(32, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(64, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Flatten(),
+        layers.Dense(128, activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.Dropout(0.2),
+        layers.Dense(1, activation="sigmoid")
+    ], name="Config_2_CNN_2Conv_32_64F_128N")
+
+
+def build_config_3_cnn_3layer(input_shape):
+    """Config 3: 3 Conv Layers (32 -> 64 -> 128 Filters) + 1 Dense Layer (128 Neurons)"""
+    return keras.Sequential([
+        keras.Input(shape=input_shape),
+        layers.Rescaling(1.0 / 255),
+        layers.Conv2D(32, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(64, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(128, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Flatten(),
+        layers.Dense(128, activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.Dropout(0.3),
+        layers.Dense(1, activation="sigmoid")
+    ], name="Config_3_CNN_3Conv_32_64_128F_128N")
+
+
+def build_config_4_cnn_deep(input_shape):
+    """Config 4: 3 Conv Layers ลึกขึ้น (64 -> 128 -> 256 Filters) + 2 Dense Layers (256 -> 64 Neurons)"""
+    return keras.Sequential([
+        keras.Input(shape=input_shape),
+        layers.Rescaling(1.0 / 255),
+        layers.Conv2D(64, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(128, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Conv2D(256, (3, 3), padding="same", activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.MaxPooling2D((2, 2)),
+        layers.Flatten(),
+        layers.Dense(256, activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.Dropout(0.3),
+        layers.Dense(64, activation="relu", kernel_regularizer=keras.regularizers.l2(1e-4)),
+        layers.Dropout(0.2),
+        layers.Dense(1, activation="sigmoid")
+    ], name="Config_4_CNN_Deep_64_128_256F_2Dense")
+
+
+def run_configuration_comparison(X_train, y_train, X_val, y_val, X_test, y_test, epochs=20, batch_size=32):
+    """
+    เทรนและเปรียบเทียบโมเดล CNN ทั้ง 4 configurations
+    
+    Returns:
+        list: ผลการทดลองของแต่ละ configuration
+    """
+    print("\n" + "=" * 60)
+    print("Part 1: Comparing CNN Configurations (Conv Layers, Filters & Neurons)")
+    print("=" * 60)
+
+    builders = [
+        ("Config 1 (1 Conv Layer: 32F, 64N)", "1 Conv [32] + Dense(64)", build_config_1_cnn_1layer),
+        ("Config 2 (2 Conv Layers: 32->64F, 128N)", "2 Conv [32, 64] + Dense(128)", build_config_2_cnn_2layer),
+        ("Config 3 (3 Conv Layers: 32->64->128F, 128N)", "3 Conv [32, 64, 128] + Dense(128)", build_config_3_cnn_3layer),
+        ("Config 4 (Deep 3 Conv: 64->128->256F, 2 Dense)", "3 Conv [64, 128, 256] + 2 Dense", build_config_4_cnn_deep),
+    ]
+
+    results = []
+
+    for name, desc, builder in builders:
+        set_seed(42)
+        model = builder(X_train.shape[1:])
+        model.compile(
+            optimizer=keras.optimizers.Adam(learning_rate=3e-4),
+            loss="binary_crossentropy",
+            metrics=["accuracy"]
+        )
+
+        start_time = time.time()
+        history = model.fit(
+            X_train, y_train,
+            validation_data=(X_val, y_val),
+            epochs=epochs,
+            batch_size=batch_size,
+            verbose=0
+        )
+        elapsed_time = time.time() - start_time
+
+        train_acc = history.history["accuracy"][-1] * 100
+        val_acc = history.history["val_accuracy"][-1] * 100
+        test_loss, test_acc = model.evaluate(X_test, y_test, verbose=0)
+        test_acc *= 100
+
+        print(f"[{name}]")
+        print(f"  Train Acc: {train_acc:.2f}% | Val Acc: {val_acc:.2f}% | Test Acc: {test_acc:.2f}% | Time: {elapsed_time:.1f}s")
+
+        results.append({
+            "name": name,
+            "architecture": desc,
+            "train_acc": train_acc,
+            "val_acc": val_acc,
+            "test_acc": test_acc,
+            "test_loss": float(test_loss),
+            "time_sec": elapsed_time
+        })
+
+    return results
+
+
+def run_epoch_comparison(X_train, y_train, X_val, y_val, X_test, y_test, epoch_list=(10, 20, 30, 50), batch_size=32):
+    """
+    เทรนและเปรียบเทียบโมเดลตามจำนวน epochs ต่างๆ
+    
+    Returns:
+        list: ผลการทดลองของแต่ละจำนวน epochs
+    """
+    print("\n" + "=" * 60)
+    print("Part 2: Comparing Different Numbers of Epochs (CNN)")
+    print("=" * 60)
+
+    results = []
+
+    for ep in epoch_list:
+        set_seed(42)
+        model = build_config_3_cnn_3layer(X_train.shape[1:])
+        model.compile(
+            optimizer=keras.optimizers.Adam(learning_rate=3e-4),
+            loss="binary_crossentropy",
+            metrics=["accuracy"]
+        )
+
+        start_time = time.time()
+        history = model.fit(
+            X_train, y_train,
+            validation_data=(X_val, y_val),
+            epochs=ep,
+            batch_size=batch_size,
+            verbose=0
+        )
+        elapsed_time = time.time() - start_time
+
+        train_acc = history.history["accuracy"][-1] * 100
+        val_acc = history.history["val_accuracy"][-1] * 100
+        test_loss, test_acc = model.evaluate(X_test, y_test, verbose=0)
+        test_acc *= 100
+
+        print(f"[Epochs: {ep:2d}] Train Acc: {train_acc:.2f}% | Val Acc: {val_acc:.2f}% | Test Acc: {test_acc:.2f}% | Time: {elapsed_time:.1f}s")
+
+        results.append({
+            "epochs": ep,
+            "train_acc": train_acc,
+            "val_acc": val_acc,
+            "test_acc": test_acc,
+            "test_loss": float(test_loss),
+            "time_sec": elapsed_time
+        })
+
+    return results
+
+
+def main():
+    print("=" * 60)
+    print("ML-LAB-07: Running CNN Comparison Experiments")
+    print("=" * 60)
+
+    # โหลดชุดข้อมูลที่เซฟไว้
+    X_train = np.load(os.path.join(OUTPUT_DIR, "X_train.npy"))
+    y_train = np.load(os.path.join(OUTPUT_DIR, "y_train.npy"))
+    X_val = np.load(os.path.join(OUTPUT_DIR, "X_val.npy"))
+    y_val = np.load(os.path.join(OUTPUT_DIR, "y_val.npy"))
+    X_test = np.load(os.path.join(OUTPUT_DIR, "X_test.npy"))
+    y_test = np.load(os.path.join(OUTPUT_DIR, "y_test.npy"))
+
+    print(f"Loaded Train samples: {len(X_train)}, Val: {len(X_val)}, Test: {len(X_test)}")
+
+    # 1. เปรียบเทียบ configurations และบันทึกกราฟ
+    config_results = run_configuration_comparison(X_train, y_train, X_val, y_val, X_test, y_test, epochs=20)
+    plot_config_comparison(config_results, os.path.join(OUTPUT_DIR, "comparison_configs.png"))
+
+    # 2. เปรียบเทียบจำนวน epochs และบันทึกกราฟ
+    epoch_results = run_epoch_comparison(X_train, y_train, X_val, y_val, X_test, y_test, epoch_list=(10, 20, 30, 50))
+    plot_epoch_comparison(epoch_results, os.path.join(OUTPUT_DIR, "comparison_epochs.png"))
+
+
+if __name__ == "__main__":
+    main()
