@@ -1,0 +1,16 @@
+{
+  "rule": "highest validation macro F1, then lowest loss",
+  "configuration": "baseline",
+  "dropout": 0.0,
+  "epochs": 10,
+  "seed": 42,
+  "batch_size": 32,
+  "train_crops": 3324,
+  "validation_crops": 909,
+  "val_loss": 0.7626459002494812,
+  "accuracy": 0.7722772277227723,
+  "precision_macro": 0.7697469804138928,
+  "recall_macro": 0.634493132290995,
+  "f1_macro": 0.6734414097255987,
+  "seconds": 43.1653323999999
+}

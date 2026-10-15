@@ -1,0 +1,148 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792074774.750192   23988 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792074778.062221   23988 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Architecture: 01-R-CNN
+train: 448 images -> 3324 crops
+val: 127 images -> 909 crops
+WARNING:tensorflow:From C:\Users\Kidovertime\AppData\Local\Programs\Python\Python312\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+Experiment: baseline, dropout=0.0, epochs=10
+C:\Users\Kidovertime\AppData\Local\Programs\Python\Python312\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/10
+104/104 - 4s - 41ms/step - accuracy: 0.5860 - loss: 1.3190 - val_accuracy: 0.5490 - val_loss: 1.2746
+Epoch 2/10
+104/104 - 3s - 32ms/step - accuracy: 0.6149 - loss: 1.1243 - val_accuracy: 0.5787 - val_loss: 1.1389
+Epoch 3/10
+104/104 - 3s - 32ms/step - accuracy: 0.6456 - loss: 1.0159 - val_accuracy: 0.5864 - val_loss: 1.1834
+Epoch 4/10
+104/104 - 3s - 31ms/step - accuracy: 0.6706 - loss: 0.9199 - val_accuracy: 0.6282 - val_loss: 1.0347
+Epoch 5/10
+104/104 - 3s - 31ms/step - accuracy: 0.6781 - loss: 0.8906 - val_accuracy: 0.6183 - val_loss: 1.0342
+Epoch 6/10
+104/104 - 3s - 32ms/step - accuracy: 0.6859 - loss: 0.8697 - val_accuracy: 0.6458 - val_loss: 1.0117
+Epoch 7/10
+104/104 - 3s - 31ms/step - accuracy: 0.6998 - loss: 0.8353 - val_accuracy: 0.6381 - val_loss: 0.9542
+Epoch 8/10
+104/104 - 5s - 50ms/step - accuracy: 0.7103 - loss: 0.7831 - val_accuracy: 0.6700 - val_loss: 0.9545
+Epoch 9/10
+104/104 - 3s - 31ms/step - accuracy: 0.7205 - loss: 0.7812 - val_accuracy: 0.6205 - val_loss: 0.9944
+Epoch 10/10
+104/104 - 3s - 31ms/step - accuracy: 0.7205 - loss: 0.7452 - val_accuracy: 0.6634 - val_loss: 0.9759
+Experiment: dropout_03, dropout=0.3, epochs=10
+C:\Users\Kidovertime\AppData\Local\Programs\Python\Python312\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/10
+104/104 - 4s - 40ms/step - accuracy: 0.5821 - loss: 1.3476 - val_accuracy: 0.5556 - val_loss: 1.2932
+Epoch 2/10
+104/104 - 3s - 32ms/step - accuracy: 0.6002 - loss: 1.1522 - val_accuracy: 0.5853 - val_loss: 1.2089
+Epoch 3/10
+104/104 - 3s - 32ms/step - accuracy: 0.6218 - loss: 1.0897 - val_accuracy: 0.6029 - val_loss: 1.1516
+Epoch 4/10
+104/104 - 3s - 32ms/step - accuracy: 0.6321 - loss: 1.0297 - val_accuracy: 0.5996 - val_loss: 1.1143
+Epoch 5/10
+104/104 - 3s - 32ms/step - accuracy: 0.6498 - loss: 0.9582 - val_accuracy: 0.6337 - val_loss: 1.0247
+Epoch 6/10
+104/104 - 3s - 32ms/step - accuracy: 0.6619 - loss: 0.9331 - val_accuracy: 0.6282 - val_loss: 1.0167
+Epoch 7/10
+104/104 - 3s - 32ms/step - accuracy: 0.6769 - loss: 0.8941 - val_accuracy: 0.6205 - val_loss: 1.0218
+Epoch 8/10
+104/104 - 3s - 32ms/step - accuracy: 0.6865 - loss: 0.8625 - val_accuracy: 0.6414 - val_loss: 0.9922
+Epoch 9/10
+104/104 - 3s - 32ms/step - accuracy: 0.6916 - loss: 0.8583 - val_accuracy: 0.5930 - val_loss: 1.0746
+Epoch 10/10
+104/104 - 3s - 32ms/step - accuracy: 0.6955 - loss: 0.8425 - val_accuracy: 0.6579 - val_loss: 0.9666
+Selected by validation: baseline
+test: 63 images -> 582 crops
+{
+  "task": "ground_truth_crop_classification",
+  "split": "test",
+  "crops": 582,
+  "classes": [
+    "fish",
+    "jellyfish",
+    "penguin",
+    "puffin",
+    "shark",
+    "starfish",
+    "stingray"
+  ],
+  "accuracy": 0.6529209621993127,
+  "precision_macro": 0.559701546819684,
+  "recall_macro": 0.4246010301822401,
+  "f1_macro": 0.44227287575812163
+}
+Saved 21 crop predictions for IMG_3164_jpeg_jpg.rf.06637eee0b72df791aa729807ca45c4d.jpg
+Architecture: 02-Fast-R-CNN
+train: 448 images -> 3324 crops
+val: 127 images -> 909 crops
+Experiment: baseline, dropout=0.0, epochs=10
+C:\Users\Kidovertime\AppData\Local\Programs\Python\Python312\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/10
+104/104 - 5s - 49ms/step - accuracy: 0.5990 - loss: 1.2739 - val_accuracy: 0.5644 - val_loss: 1.1964
+Epoch 2/10
+104/104 - 4s - 42ms/step - accuracy: 0.6874 - loss: 0.9239 - val_accuracy: 0.6843 - val_loss: 0.9107
+Epoch 3/10
+104/104 - 4s - 41ms/step - accuracy: 0.7515 - loss: 0.7294 - val_accuracy: 0.7162 - val_loss: 0.8656
+Epoch 4/10
+104/104 - 4s - 41ms/step - accuracy: 0.7750 - loss: 0.6348 - val_accuracy: 0.7459 - val_loss: 0.6937
+Epoch 5/10
+104/104 - 4s - 41ms/step - accuracy: 0.7984 - loss: 0.5645 - val_accuracy: 0.7613 - val_loss: 0.7103
+Epoch 6/10
+104/104 - 4s - 41ms/step - accuracy: 0.8129 - loss: 0.5126 - val_accuracy: 0.7624 - val_loss: 0.7107
+Epoch 7/10
+104/104 - 4s - 40ms/step - accuracy: 0.8418 - loss: 0.4477 - val_accuracy: 0.7712 - val_loss: 0.6842
+Epoch 8/10
+104/104 - 4s - 40ms/step - accuracy: 0.8538 - loss: 0.3932 - val_accuracy: 0.7844 - val_loss: 0.6669
+Epoch 9/10
+104/104 - 4s - 41ms/step - accuracy: 0.8694 - loss: 0.3719 - val_accuracy: 0.7712 - val_loss: 0.7324
+Epoch 10/10
+104/104 - 4s - 40ms/step - accuracy: 0.8745 - loss: 0.3375 - val_accuracy: 0.7723 - val_loss: 0.7626
+Experiment: dropout_03, dropout=0.3, epochs=10
+C:\Users\Kidovertime\AppData\Local\Programs\Python\Python312\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
+  self.data_adapter = data_adapters.get_data_adapter(
+Epoch 1/10
+104/104 - 5s - 48ms/step - accuracy: 0.5927 - loss: 1.2993 - val_accuracy: 0.5721 - val_loss: 1.1355
+Epoch 2/10
+104/104 - 4s - 41ms/step - accuracy: 0.6661 - loss: 0.9858 - val_accuracy: 0.7129 - val_loss: 1.0039
+Epoch 3/10
+104/104 - 4s - 40ms/step - accuracy: 0.7250 - loss: 0.8299 - val_accuracy: 0.6986 - val_loss: 0.8620
+Epoch 4/10
+104/104 - 4s - 40ms/step - accuracy: 0.7482 - loss: 0.7475 - val_accuracy: 0.7404 - val_loss: 0.7807
+Epoch 5/10
+104/104 - 4s - 41ms/step - accuracy: 0.7750 - loss: 0.6597 - val_accuracy: 0.7338 - val_loss: 0.7432
+Epoch 6/10
+104/104 - 4s - 40ms/step - accuracy: 0.7810 - loss: 0.6246 - val_accuracy: 0.7580 - val_loss: 0.6998
+Epoch 7/10
+104/104 - 4s - 41ms/step - accuracy: 0.8063 - loss: 0.5572 - val_accuracy: 0.7767 - val_loss: 0.7201
+Epoch 8/10
+104/104 - 4s - 41ms/step - accuracy: 0.8120 - loss: 0.5230 - val_accuracy: 0.7877 - val_loss: 0.6239
+Epoch 9/10
+104/104 - 4s - 41ms/step - accuracy: 0.8234 - loss: 0.4977 - val_accuracy: 0.7349 - val_loss: 0.7801
+Epoch 10/10
+104/104 - 4s - 40ms/step - accuracy: 0.8300 - loss: 0.4752 - val_accuracy: 0.7910 - val_loss: 0.6209
+Selected by validation: baseline
+test: 63 images -> 582 crops
+{
+  "task": "ground_truth_crop_classification",
+  "split": "test",
+  "crops": 582,
+  "classes": [
+    "fish",
+    "jellyfish",
+    "penguin",
+    "puffin",
+    "shark",
+    "starfish",
+    "stingray"
+  ],
+  "accuracy": 0.7835051546391752,
+  "precision_macro": 0.7834108989231215,
+  "recall_macro": 0.6666783065108072,
+  "f1_macro": 0.6956744769053106
+}
+Saved 21 crop predictions for IMG_3164_jpeg_jpg.rf.06637eee0b72df791aa729807ca45c4d.jpg
+All Aquarium experiments, evaluation and sample predictions completed

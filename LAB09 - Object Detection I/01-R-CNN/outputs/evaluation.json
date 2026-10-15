@@ -1,0 +1,140 @@
+{
+  "task": "ground_truth_crop_classification",
+  "split": "test",
+  "crops": 582,
+  "classes": [
+    "fish",
+    "jellyfish",
+    "penguin",
+    "puffin",
+    "shark",
+    "starfish",
+    "stingray"
+  ],
+  "accuracy": 0.6529209621993127,
+  "precision_macro": 0.559701546819684,
+  "recall_macro": 0.4246010301822401,
+  "f1_macro": 0.44227287575812163,
+  "report": {
+    "fish": {
+      "precision": 0.6223404255319149,
+      "recall": 0.9397590361445783,
+      "f1-score": 0.7488,
+      "support": 249.0
+    },
+    "jellyfish": {
+      "precision": 0.9074074074074074,
+      "recall": 0.3181818181818182,
+      "f1-score": 0.47115384615384615,
+      "support": 154.0
+    },
+    "penguin": {
+      "precision": 0.7029702970297029,
+      "recall": 0.8658536585365854,
+      "f1-score": 0.7759562841530054,
+      "support": 82.0
+    },
+    "puffin": {
+      "precision": 0.7058823529411765,
+      "recall": 0.34285714285714286,
+      "f1-score": 0.46153846153846156,
+      "support": 35.0
+    },
+    "shark": {
+      "precision": 0.3793103448275862,
+      "recall": 0.3055555555555556,
+      "f1-score": 0.3384615384615385,
+      "support": 36.0
+    },
+    "starfish": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 11.0
+    },
+    "stingray": {
+      "precision": 0.6,
+      "recall": 0.2,
+      "f1-score": 0.3,
+      "support": 15.0
+    },
+    "accuracy": 0.6529209621993127,
+    "macro avg": {
+      "precision": 0.559701546819684,
+      "recall": 0.4246010301822401,
+      "f1-score": 0.44227287575812163,
+      "support": 582.0
+    },
+    "weighted avg": {
+      "precision": 0.6867837213425385,
+      "recall": 0.6529209621993127,
+      "f1-score": 0.610783108499485,
+      "support": 582.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      234,
+      3,
+      8,
+      2,
+      2,
+      0,
+      0
+    ],
+    [
+      90,
+      49,
+      5,
+      0,
+      8,
+      0,
+      2
+    ],
+    [
+      7,
+      0,
+      71,
+      1,
+      3,
+      0,
+      0
+    ],
+    [
+      9,
+      0,
+      13,
+      12,
+      1,
+      0,
+      0
+    ],
+    [
+      25,
+      0,
+      0,
+      0,
+      11,
+      0,
+      0
+    ],
+    [
+      8,
+      2,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      0,
+      4,
+      1,
+      4,
+      0,
+      3
+    ]
+  ]
+}

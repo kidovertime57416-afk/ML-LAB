@@ -1,104 +1,105 @@
-# ML-09-Object Detection I
+# LAB09 ทดลองจำแนกสัตว์น้ำด้วยโมเดลแบบ R-CNN และ Fast R-CNN ย่อ
 
-This project explores **R-CNN, and Fast R-CNN** using Python and TensorFlow/Keras with the Berkeley DeepDrive (BDD100K) dataset. It covers model training, evaluation, image inference, and real-time webcam testing through simplified educational implementations.
+ใช้ Aquarium dataset ชุดเดียวกับ LAB10 มาทดลองจำแนกภาพ crop ของสัตว์ 7 คลาส โค้ดยังคงแนวทาง baseline แบบย่อจากโครงเดิม โดยใช้กรอบ annotation ตัดวัตถุออกมาแล้วส่งเข้า CNN
 
-## 1. Project Overview
+## ภาษาที่ใช้และเครื่องมือ
 
-The project introduces two CNN-based object detection architectures using a shared BDD100K dataset. Each architecture is organized into a separate folder with independent scripts for training, evaluation, and inference.
+ใช้ **Python 3.12** และ TensorFlow/Keras สร้างโมเดล ใช้ OpenCV ตัดและย่อภาพ, NumPy จัดการ array, Scikit-learn คำนวณ metrics, Matplotlib วาดกราฟ และ PyYAML อ่านรายชื่อคลาส
 
-**Features:**
-- Exploration of two R-CNN-based architectures
-- Shared BDD100K dataset with 10 road-object classes
-- Model training and evaluation
-- Image and real-time webcam testing
-- Model checkpoints and experiment outputs
-- Separate implementations for architectural comparison
+## อ้างอิงแหล่งข้อมูล
 
-## 2. Dataset
+- Dataset: [Aquarium บน Kaggle](https://www.kaggle.com/datasets/slavkoprytula/aquarium-data-cots)
+- แหล่งภาพและ annotation: [Roboflow Aquarium](https://public.roboflow.ai/object-detection/aquarium), CC BY 4.0
+- อ่านข้อมูลจาก [LAB10](../LAB10-Object%20Detection%20II/README.md) โดยตรง ใช้ split เดิม train 448 รูป, validation 127 รูป และ test 63 รูป
+- คลาส: `fish`, `jellyfish`, `penguin`, `puffin`, `shark`, `starfish`, `stingray`
+- แนวคิดสถาปัตยกรรม: [R-CNN](https://arxiv.org/abs/1311.2524) และ [Fast R-CNN](https://arxiv.org/abs/1504.08083)
 
-The [BDD100K dataset](https://www.kaggle.com/datasets/a7madmostafa/bdd100k-yolo?resource=download) is used in YOLO annotation format.
+เตรียม crop ขนาด 64x64, แปลง BGR เป็น RGB และ normalize เป็น 0-1 ใช้ validation ที่แยกตามภาพจาก LAB10 เพื่อให้ crop จากภาพเดียวกันอยู่ใน split เดียวกัน
 
-| Split | Images |
-|---|---:|
-| Training | 70,000 |
-| Validation | 10,000 |
-| Test | Provided in the dataset (count not specified) |
+## ผลการทดลองและรูปผลลัพธ์
 
-**Classes:** `person`, `rider`, `car`, `bus`, `truck`, `bike`, `motor`, `traffic light`, `traffic sign`, `train`.
+ลองเปลี่ยนจาก baseline ที่ไม่ใช้ Dropout เป็น Dropout 0.3 หลัง Dense 128 โดยคงจำนวน Conv, neurons, learning rate, batch size, epochs และ seed เท่ากัน ใช้ Adam 0.001, batch 32, 10 epochs และ seed 42 ทุกรอบ แต่ละ architecture เลือก variant จาก validation macro F1 ถ้าเท่ากันจึงดู validation loss
 
-The dataset is shared across both architectures. YOLO annotations can be converted into the required bounding-box format during preprocessing.
+โมเดลใน `01-R-CNN` ใช้ GlobalAveragePooling ส่วน `02-Fast-R-CNN` ใช้ pooling ของ crop feature ต่อด้วย Flatten แบบเดิม ทั้งสองเป็น crop-classification baseline ภาพตัวอย่างใช้กรอบจาก annotation ดังนั้นคะแนนด้านล่างเป็นการจำแนก crop และไม่ได้วัด detection mAP
 
-## 3. Project Structure
+### R-CNN แบบย่อ
+
+| Variant | Dropout | Val accuracy | Val macro F1 | Val loss |
+| --- | ---: | ---: | ---: | ---: |
+| baseline | 0.0 | 66.34% | 0.4676 | 0.9759 |
+| dropout_03 | 0.3 | 65.79% | 0.3840 | 0.9666 |
+
+![เปรียบเทียบ dropout ของ R-CNN แบบย่อ](01-R-CNN/outputs/comparison.png)
+
+![กราฟ train และ validation ของ R-CNN แบบย่อ](01-R-CNN/outputs/training_history.png)
+
+### Fast R-CNN แบบย่อ
+
+| Variant | Dropout | Val accuracy | Val macro F1 | Val loss |
+| --- | ---: | ---: | ---: | ---: |
+| baseline | 0.0 | 77.23% | 0.6734 | 0.7626 |
+| dropout_03 | 0.3 | 79.10% | 0.6440 | 0.6209 |
+
+![เปรียบเทียบ dropout ของ Fast R-CNN แบบย่อ](02-Fast-R-CNN/outputs/comparison.png)
+
+![กราฟ train และ validation ของ Fast R-CNN แบบย่อ](02-Fast-R-CNN/outputs/training_history.png)
+
+### ผลบน Test Set
+
+ใช้โมเดลที่เลือกจาก validation ของแต่ละ architecture มาประเมิน crop ทั้ง 582 ชิ้นจากภาพ test 63 รูป
+
+| Model | Variant ที่เลือก | Test accuracy | Macro precision | Macro recall | Macro F1 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| R-CNN แบบย่อ | baseline | 65.29% | 0.5597 | 0.4246 | 0.4423 |
+| Fast R-CNN แบบย่อ | baseline | 78.35% | 0.7834 | 0.6667 | 0.6957 |
+
+![Confusion matrix ของ R-CNN แบบย่อ](01-R-CNN/outputs/confusion_matrix.png)
+
+![Confusion matrix ของ Fast R-CNN แบบย่อ](02-Fast-R-CNN/outputs/confusion_matrix.png)
+
+### ภาพตัวอย่างที่ใช้ทดสอบ
+
+ทั้งสองโมเดลใช้ภาพ test เดียวกัน มี 21 crop สีเขียวคือทายคลาสถูก สีแดงคือทายคลาสผิด กรอบมาจาก annotation ชื่อคลาสและ confidence มาจากโมเดล
+
+![ผลจำแนก crop ของ R-CNN แบบย่อ](01-R-CNN/outputs/image_result.jpg)
+
+![ผลจำแนก crop ของ Fast R-CNN แบบย่อ](02-Fast-R-CNN/outputs/image_result.jpg)
+
+ดูตัวเลขเพิ่มเติมใน [ผล R-CNN](01-R-CNN/outputs/evaluation.json) และ [ผล Fast R-CNN](02-Fast-R-CNN/outputs/evaluation.json)
+
+## โครงสร้างไฟล์
 
 ```text
-ML-09-Object-Detection-I/
-├── dataset/
-│   ├── train/{images,labels}/
-│   ├── val/{images,labels}/
-│   ├── test/{images,labels}/
-│   └── data.yaml
-│
-├── 01-R-CNN/
-│   ├── train.py
-│   ├── evaluate.py
-│   ├── image_test.py
-│   ├── realtime_test.py
-│   ├── _core.py            # Crop-classification helpers for webcam demo
-│   └── outputs/
-│
-├── 02-Fast-R-CNN/
-│   ├── train.py
-│   ├── evaluate.py
-│   ├── image_test.py
-│   ├── realtime_test.py
-│   └── outputs/
-│
+LAB09 - Object Detection I/
+├── README.md
 ├── requirements.txt
-└── README.md
+├── data_loader.py             # อ่าน Aquarium และเตรียม crop ให้ทั้งสองโมเดล
+├── experiments.py             # เทียบ dropout เลือกด้วย val และประเมิน test
+├── inference.py               # ทายภาพ crop และ demo webcam แบบ sliding window
+├── 01-R-CNN/
+│   ├── train.py               # Conv + GlobalAveragePooling
+│   ├── evaluate.py
+│   ├── image_test.py
+│   ├── realtime_test.py
+│   ├── _core.py
+│   └── outputs/
+├── 02-Fast-R-CNN/
+│   ├── train.py               # Conv + fixed pooling + Flatten
+│   ├── evaluate.py
+│   ├── image_test.py
+│   ├── realtime_test.py
+│   └── outputs/
+└── outputs/run.log            # log ของการทดลองทั้งสองโมเดล
 ```
 
-| Script | Purpose |
-|---|---|
-| `train.py` | Train the model and save checkpoints |
-| `evaluate.py` | Evaluate model performance on labeled images |
-| `image_test.py` | Test the trained model on selected images |
-| `realtime_test.py` | Run webcam-based real-time inference |
-| `outputs/` | Store trained models, logs, and inference results |
+ใน outputs ของแต่ละโมเดลมี `experiments.json`, `selection.json`, `model.keras`, `classes.json`, `history.json`, `training_history.png`, `comparison.png`, `evaluation.json`, `confusion_matrix.png`, `image_result.jpg` และ `image_predictions.json` ส่วน history ของแต่ละ variant อยู่ใน `experiments/`
 
-Each architecture uses the same dataset and follows an independent workflow. Model creation, data loading, and preprocessing are implemented directly in the Python scripts.
+## สรุปการทำโปรเจกต์
 
-## 4. Object Detection
+เปลี่ยน dataset เป็น Aquarium และแก้รายชื่อคลาสให้ตรงกันทุกสคริปต์ ลองเพิ่ม Dropout เพื่อดูผลต่อการจำแนก crop โดยใช้ validation แยกจาก train ตามภาพ ใช้ macro F1 ประกอบ accuracy เพราะจำนวนตัวอย่างของแต่ละคลาสไม่เท่ากัน
 
-**Model training** — navigate to the selected architecture folder and run:
+รอบนี้ Dropout 0.3 ไม่ช่วย macro F1 ของทั้งสอง architecture จึงเลือก baseline ทั้งคู่ ฝั่ง R-CNN ได้ test accuracy 65.29% และ macro F1 0.4423 ส่วน Fast R-CNN ได้ accuracy 78.35% และ macro F1 0.6957
 
-```bash
-python train.py --limit 200 --epochs 50
-```
+ข้อสังเกตคือ Fast R-CNN ที่เพิ่ม Dropout มี validation accuracy สูงขึ้น แต่ macro F1 ลดลง เลยต้องดูหลาย metric ประกอบกัน ผลนี้ใช้ split และ seed เดียว และเป็นการจำแนก crop ที่มีกรอบจริงให้แล้ว
 
-**Model evaluation** — evaluate the trained model using labeled test images:
-
-```bash
-python evaluate.py --limit 200 --split test
-```
-
-**Image testing** — select test images, run inference, and save prediction results:
-
-```bash
-python image_test.py
-```
-
-**Real-time testing** — open webcam index 0 and perform real-time inference. Press **Q** to exit:
-
-```bash
-python realtime_test.py --camera 0 --threshold 0.85 --regions 25
-```
-
-The scripts must reference the correct dataset directory and trained model checkpoint.
-
-**Implementation note:** The current R-CNN and Fast R-CNN implementations use simplified crop-classification baselines rather than complete object detection architectures. Full implementations require region proposals, bounding-box regression, and detection postprocessing. The BDD100K dataset provides YOLO-format bounding-box annotations for training and evaluation.
-
-## 5. References
-
-- [BDD100K / Berkeley DeepDrive](https://www.kaggle.com/datasets/a7madmostafa/bdd100k-yolo?resource=download)
-- [R-CNN](https://arxiv.org/abs/1311.2524)
-- [Fast R-CNN](https://arxiv.org/abs/1504.08083)
+สคริปต์ webcam ยังคงเป็น sliding-window crop-classification demo ตามโครงเดิม ไม่มี background class และ box regression จึงอาจตีกรอบหรือทายคลาสเกินได้ เครื่องที่ใช้ทำงานนี้ไม่พบกล้องสำหรับทดสอบสด

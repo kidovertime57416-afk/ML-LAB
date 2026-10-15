@@ -1,0 +1,237 @@
+{
+  "source_image": "IMG_3164_jpeg_jpg.rf.06637eee0b72df791aa729807ca45c4d.jpg",
+  "boxes_from": "ground_truth",
+  "predictions": [
+    {
+      "box": [
+        105,
+        654,
+        484,
+        810
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.378054141998291
+    },
+    {
+      "box": [
+        399,
+        577,
+        560,
+        682
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.3890375792980194
+    },
+    {
+      "box": [
+        274,
+        257,
+        302,
+        359
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.8005090355873108
+    },
+    {
+      "box": [
+        504,
+        550,
+        728,
+        632
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.45113998651504517
+    },
+    {
+      "box": [
+        115,
+        295,
+        164,
+        370
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.8417847156524658
+    },
+    {
+      "box": [
+        440,
+        290,
+        474,
+        360
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.521512508392334
+    },
+    {
+      "box": [
+        387,
+        299,
+        422,
+        365
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.698298454284668
+    },
+    {
+      "box": [
+        550,
+        265,
+        582,
+        331
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.9237337112426758
+    },
+    {
+      "box": [
+        19,
+        253,
+        54,
+        318
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.7673599720001221
+    },
+    {
+      "box": [
+        328,
+        480,
+        478,
+        536
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.5308685898780823
+    },
+    {
+      "box": [
+        668,
+        489,
+        736,
+        534
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.6474269032478333
+    },
+    {
+      "box": [
+        0,
+        282,
+        21,
+        327
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.6305205225944519
+    },
+    {
+      "box": [
+        584,
+        278,
+        603,
+        322
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.9331942200660706
+    },
+    {
+      "box": [
+        109,
+        275,
+        131,
+        312
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.5435928106307983
+    },
+    {
+      "box": [
+        1,
+        252,
+        22,
+        289
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.4887806475162506
+    },
+    {
+      "box": [
+        174,
+        294,
+        209,
+        331
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.6705082058906555
+    },
+    {
+      "box": [
+        605,
+        289,
+        621,
+        324
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.8864330053329468
+    },
+    {
+      "box": [
+        628,
+        452,
+        733,
+        485
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.803717851638794
+    },
+    {
+      "box": [
+        626,
+        306,
+        647,
+        336
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.822505533695221
+    },
+    {
+      "box": [
+        681,
+        303,
+        699,
+        330
+      ],
+      "actual": "penguin",
+      "predicted": "fish",
+      "confidence": 0.4554803967475891
+    },
+    {
+      "box": [
+        649,
+        303,
+        667,
+        330
+      ],
+      "actual": "penguin",
+      "predicted": "penguin",
+      "confidence": 0.8882648348808289
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "configuration": "baseline",
+    "dropout": 0.0,
+    "epochs": 10,
+    "seed": 42,
+    "batch_size": 32,
+    "train_crops": 3324,
+    "validation_crops": 909,
+    "val_loss": 0.7626459002494812,
+    "accuracy": 0.7722772277227723,
+    "precision_macro": 0.7697469804138928,
+    "recall_macro": 0.634493132290995,
+    "f1_macro": 0.6734414097255987,
+    "seconds": 43.1653323999999
+  },
+  {
+    "configuration": "dropout_03",
+    "dropout": 0.3,
+    "epochs": 10,
+    "seed": 42,
+    "batch_size": 32,
+    "train_crops": 3324,
+    "validation_crops": 909,
+    "val_loss": 0.6208776235580444,
+    "accuracy": 0.7909790979097909,
+    "precision_macro": 0.7490836562333645,
+    "recall_macro": 0.6165282170100905,
+    "f1_macro": 0.6439989587502428,
+    "seconds": 42.988035900001705
+  }
+]
