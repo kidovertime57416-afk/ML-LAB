@@ -1,0 +1,14 @@
+{
+  "type": "slideshow_from_test_images",
+  "frames": 60,
+  "fps": 10,
+  "seconds": 6,
+  "source_images": [
+    "IMG_3164_jpeg_jpg.rf.06637eee0b72df791aa729807ca45c4d.jpg",
+    "IMG_2380_jpeg_jpg.rf.a23809682eb1466c1136ca0f55de8fb5.jpg",
+    "IMG_2301_jpeg_jpg.rf.2c19ae5efbd1f8611b5578125f001695.jpg",
+    "IMG_8404_jpg.rf.265b89e862a375f6b89f781ea60ed480.jpg",
+    "IMG_2468_jpeg_jpg.rf.c933cc14c99b11a90413a1490d4556db.jpg",
+    "IMG_2465_jpeg_jpg.rf.7e699ec1d2e373d93dac32cd02db9438.jpg"
+  ]
+}

@@ -1,0 +1,291 @@
+Ultralytics 8.4.76  Python-3.12.0 torch-2.8.0+cpu CPU (12th Gen Intel Core i5-12400F)
+Model summary (fused): 73 layers, 3,007,013 parameters, 0 gradients, 8.1 GFLOPs
+[34m[1mval: [0mFast image access  (ping: 0.10.0 ms, read: 721.1205.9 MB/s, size: 133.4 KB)
+
+[K[34m[1mval: [0mScanning C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\labels.cache... 63 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 63/63  0.0s
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 25% ━━━───────── 1/4 2.4s/it 0.7s<7.2s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 50% ━━━━━━────── 2/4 1.3s/it 1.4s<2.7s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 75% ━━━━━━━━━─── 3/4 1.0it/s 2.0s<1.0s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 4/4 1.6it/s 2.6s
+                   all         63        582      0.644      0.546      0.549      0.336
+                  fish         30        249      0.517      0.482      0.496      0.274
+             jellyfish         11        154      0.711      0.832      0.821      0.487
+               penguin          7         82      0.579       0.52      0.462      0.196
+                puffin          6         35      0.435      0.143      0.147     0.0589
+                 shark         14         36      0.563      0.643      0.653      0.396
+              starfish          5         11          1      0.536      0.552      0.388
+              stingray         10         15        0.7      0.667      0.714      0.548
+Speed: 0.5ms preprocess, 28.0ms inference, 0.0ms loss, 2.7ms postprocess per image
+Results saved to [1mC:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\runs\aquarium\evaluation[0m
+{
+  "split": "test",
+  "configuration": "img480_batch16",
+  "weights": "runs/aquarium/comparisons/img480_batch16/weights/best.pt",
+  "precision": 0.6435463098565821,
+  "recall": 0.5460620350709549,
+  "mAP50": 0.5491501068486226,
+  "mAP50_95": 0.335659733938947,
+  "per_class": [
+    {
+      "Class": "fish",
+      "Images": 30,
+      "Instances": 249,
+      "Box-P": 0.51669,
+      "Box-R": 0.48193,
+      "Box-F1": 0.4987,
+      "mAP50": 0.49646,
+      "mAP50-95": 0.27428
+    },
+    {
+      "Class": "jellyfish",
+      "Images": 11,
+      "Instances": 154,
+      "Box-P": 0.7113,
+      "Box-R": 0.83192,
+      "Box-F1": 0.7669,
+      "mAP50": 0.82066,
+      "mAP50-95": 0.48741
+    },
+    {
+      "Class": "penguin",
+      "Images": 7,
+      "Instances": 82,
+      "Box-P": 0.57913,
+      "Box-R": 0.52025,
+      "Box-F1": 0.54811,
+      "mAP50": 0.46194,
+      "mAP50-95": 0.1959
+    },
+    {
+      "Class": "puffin",
+      "Images": 6,
+      "Instances": 35,
+      "Box-P": 0.4347,
+      "Box-R": 0.14286,
+      "Box-F1": 0.21504,
+      "mAP50": 0.14666,
+      "mAP50-95": 0.05885
+    },
+    {
+      "Class": "shark",
+      "Images": 14,
+      "Instances": 36,
+      "Box-P": 0.56255,
+      "Box-R": 0.64308,
+      "Box-F1": 0.60013,
+      "mAP50": 0.65256,
+      "mAP50-95": 0.39629
+    },
+    {
+      "Class": "starfish",
+      "Images": 5,
+      "Instances": 11,
+      "Box-P": 1.0,
+      "Box-R": 0.53573,
+      "Box-F1": 0.69768,
+      "mAP50": 0.55184,
+      "mAP50-95": 0.38843
+    },
+    {
+      "Class": "stingray",
+      "Images": 10,
+      "Instances": 15,
+      "Box-P": 0.70045,
+      "Box-R": 0.66667,
+      "Box-F1": 0.68314,
+      "mAP50": 0.71393,
+      "mAP50-95": 0.54845
+    }
+  ]
+}
+
+image 1/1 C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\images\IMG_3164_jpeg_jpg.rf.06637eee0b72df791aa729807ca45c4d.jpg: 480x384 13 penguins, 1 puffin, 32.9ms
+Speed: 1.9ms preprocess, 32.9ms inference, 0.6ms postprocess per image at shape (1, 3, 480, 384)
+Results saved to [1mC:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\runs\aquarium\image_test[0m
+Image: IMG_3164_jpeg_jpg.rf.06637eee0b72df791aa729807ca45c4d.jpg
+penguin: 0.79
+penguin: 0.78
+penguin: 0.57
+puffin: 0.49
+penguin: 0.43
+penguin: 0.42
+penguin: 0.37
+penguin: 0.37
+penguin: 0.34
+penguin: 0.33
+penguin: 0.32
+penguin: 0.29
+penguin: 0.28
+penguin: 0.26
+
+image 1/1 C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\images\IMG_2380_jpeg_jpg.rf.a23809682eb1466c1136ca0f55de8fb5.jpg: 480x384 2 fishs, 1 stingray, 22.7ms
+Speed: 1.6ms preprocess, 22.7ms inference, 0.5ms postprocess per image at shape (1, 3, 480, 384)
+Results saved to [1mC:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\runs\aquarium\image_test[0m
+Image: IMG_2380_jpeg_jpg.rf.a23809682eb1466c1136ca0f55de8fb5.jpg
+fish: 0.65
+fish: 0.42
+stingray: 0.33
+
+image 1/1 C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\images\IMG_2301_jpeg_jpg.rf.2c19ae5efbd1f8611b5578125f001695.jpg: 480x384 12 penguins, 22.8ms
+Speed: 1.0ms preprocess, 22.8ms inference, 0.5ms postprocess per image at shape (1, 3, 480, 384)
+Results saved to [1mC:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\runs\aquarium\image_test[0m
+Image: IMG_2301_jpeg_jpg.rf.2c19ae5efbd1f8611b5578125f001695.jpg
+penguin: 0.74
+penguin: 0.64
+penguin: 0.58
+penguin: 0.56
+penguin: 0.55
+penguin: 0.53
+penguin: 0.52
+penguin: 0.41
+penguin: 0.40
+penguin: 0.33
+penguin: 0.30
+penguin: 0.29
+
+image 1/1 C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\images\IMG_8404_jpg.rf.265b89e862a375f6b89f781ea60ed480.jpg: 384x480 4 fishs, 1 shark, 1 stingray, 38.3ms
+Speed: 1.2ms preprocess, 38.3ms inference, 0.5ms postprocess per image at shape (1, 3, 384, 480)
+Results saved to [1mC:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\runs\aquarium\image_test[0m
+Image: IMG_8404_jpg.rf.265b89e862a375f6b89f781ea60ed480.jpg
+stingray: 0.89
+fish: 0.75
+fish: 0.45
+fish: 0.41
+fish: 0.32
+shark: 0.30
+
+image 1/1 C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\images\IMG_2468_jpeg_jpg.rf.c933cc14c99b11a90413a1490d4556db.jpg: 480x384 7 jellyfishs, 25.8ms
+Speed: 1.9ms preprocess, 25.8ms inference, 0.6ms postprocess per image at shape (1, 3, 480, 384)
+Results saved to [1mC:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\runs\aquarium\image_test[0m
+Image: IMG_2468_jpeg_jpg.rf.c933cc14c99b11a90413a1490d4556db.jpg
+jellyfish: 0.90
+jellyfish: 0.87
+jellyfish: 0.87
+jellyfish: 0.86
+jellyfish: 0.85
+jellyfish: 0.81
+jellyfish: 0.66
+
+video 1/1 (frame 1/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 1 puffin, 22.2ms
+Frame detected objects: 18
+video 1/1 (frame 2/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 21.2ms
+Frame detected objects: 19
+video 1/1 (frame 3/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 20.0ms
+Frame detected objects: 19
+video 1/1 (frame 4/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 22.7ms
+Frame detected objects: 19
+video 1/1 (frame 5/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 19.7ms
+Frame detected objects: 19
+video 1/1 (frame 6/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 22.9ms
+Frame detected objects: 19
+video 1/1 (frame 7/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 24.3ms
+Frame detected objects: 19
+video 1/1 (frame 8/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 23.3ms
+Frame detected objects: 19
+video 1/1 (frame 9/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 22.2ms
+Frame detected objects: 19
+video 1/1 (frame 10/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 17 penguins, 2 puffins, 25.0ms
+Frame detected objects: 19
+video 1/1 (frame 11/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 26.0ms
+Frame detected objects: 3
+video 1/1 (frame 12/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 26.0ms
+Frame detected objects: 3
+video 1/1 (frame 13/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 22.0ms
+Frame detected objects: 3
+video 1/1 (frame 14/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 21.9ms
+Frame detected objects: 3
+video 1/1 (frame 15/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 23.5ms
+Frame detected objects: 3
+video 1/1 (frame 16/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 21.8ms
+Frame detected objects: 3
+video 1/1 (frame 17/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 20.8ms
+Frame detected objects: 3
+video 1/1 (frame 18/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 21.1ms
+Frame detected objects: 3
+video 1/1 (frame 19/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 22.5ms
+Frame detected objects: 3
+video 1/1 (frame 20/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 2 fishs, 1 shark, 21.7ms
+Frame detected objects: 3
+video 1/1 (frame 21/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 15 penguins, 23.8ms
+Frame detected objects: 15
+video 1/1 (frame 22/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 15 penguins, 24.8ms
+Frame detected objects: 15
+video 1/1 (frame 23/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 23.2ms
+Frame detected objects: 13
+video 1/1 (frame 24/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 23.5ms
+Frame detected objects: 13
+video 1/1 (frame 25/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 23.0ms
+Frame detected objects: 13
+video 1/1 (frame 26/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 23.9ms
+Frame detected objects: 13
+video 1/1 (frame 27/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 24.2ms
+Frame detected objects: 13
+video 1/1 (frame 28/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 21.0ms
+Frame detected objects: 13
+video 1/1 (frame 29/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 21.0ms
+Frame detected objects: 13
+video 1/1 (frame 30/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 13 penguins, 24.3ms
+Frame detected objects: 13
+video 1/1 (frame 31/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 3 fishs, 1 shark, 1 stingray, 20.9ms
+Frame detected objects: 5
+video 1/1 (frame 32/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 3 fishs, 1 shark, 1 stingray, 21.3ms
+Frame detected objects: 5
+video 1/1 (frame 33/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 3 fishs, 1 shark, 1 stingray, 21.7ms
+Frame detected objects: 5
+video 1/1 (frame 34/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 3 fishs, 1 shark, 1 stingray, 21.2ms
+Frame detected objects: 5
+video 1/1 (frame 35/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 4 fishs, 1 shark, 1 stingray, 21.5ms
+Frame detected objects: 6
+video 1/1 (frame 36/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 4 fishs, 1 shark, 1 stingray, 21.4ms
+Frame detected objects: 6
+video 1/1 (frame 37/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 4 fishs, 1 shark, 1 stingray, 22.7ms
+Frame detected objects: 6
+video 1/1 (frame 38/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 4 fishs, 1 shark, 1 stingray, 22.2ms
+Frame detected objects: 6
+video 1/1 (frame 39/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 4 fishs, 1 shark, 1 stingray, 22.5ms
+Frame detected objects: 6
+video 1/1 (frame 40/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 4 fishs, 1 shark, 1 stingray, 21.7ms
+Frame detected objects: 6
+video 1/1 (frame 41/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 21.4ms
+Frame detected objects: 8
+video 1/1 (frame 42/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 21.4ms
+Frame detected objects: 8
+video 1/1 (frame 43/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 18.4ms
+Frame detected objects: 8
+video 1/1 (frame 44/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 19.5ms
+Frame detected objects: 8
+video 1/1 (frame 45/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 18.2ms
+Frame detected objects: 8
+video 1/1 (frame 46/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 20.2ms
+Frame detected objects: 8
+video 1/1 (frame 47/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 19.6ms
+Frame detected objects: 8
+video 1/1 (frame 48/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 20.1ms
+Frame detected objects: 8
+video 1/1 (frame 49/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 19.8ms
+Frame detected objects: 8
+video 1/1 (frame 50/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 8 jellyfishs, 19.1ms
+Frame detected objects: 8
+video 1/1 (frame 51/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 22 jellyfishs, 20.8ms
+Frame detected objects: 22
+video 1/1 (frame 52/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 21 jellyfishs, 20.3ms
+Frame detected objects: 21
+video 1/1 (frame 53/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 22 jellyfishs, 18.9ms
+Frame detected objects: 22
+video 1/1 (frame 54/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 22 jellyfishs, 19.0ms
+Frame detected objects: 22
+video 1/1 (frame 55/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 21 jellyfishs, 19.9ms
+Frame detected objects: 21
+video 1/1 (frame 56/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 21 jellyfishs, 18.7ms
+Frame detected objects: 21
+video 1/1 (frame 57/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 21 jellyfishs, 20.4ms
+Frame detected objects: 21
+video 1/1 (frame 58/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 21 jellyfishs, 19.3ms
+Frame detected objects: 21
+video 1/1 (frame 59/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 21 jellyfishs, 21.0ms
+Frame detected objects: 21
+video 1/1 (frame 60/60) C:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\dataset\test\video.mp4: 384x480 21 jellyfishs, 20.0ms
+Frame detected objects: 21
+Speed: 0.9ms preprocess, 21.6ms inference, 0.5ms postprocess per image at shape (1, 3, 384, 480)
+Results saved to [1mC:\Users\Kidovertime\Desktop\ML\Github\LAB10-Object Detection II\runs\aquarium\video_test[0m

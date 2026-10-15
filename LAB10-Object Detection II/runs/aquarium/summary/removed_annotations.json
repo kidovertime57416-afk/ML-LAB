@@ -1,0 +1,14 @@
+[
+  {
+    "file": "dataset/test/labels/IMG_2423_jpeg_jpg.rf.1c0901882e71d5ebd26f036f4e22da65.txt",
+    "line_number": 17,
+    "annotation": "4 0.58203125 0.2958984375 0 0",
+    "reason": "zero-area bounding box"
+  },
+  {
+    "file": "dataset/test/labels/IMG_2570_jpeg_jpg.rf.ed40900b657a5b23d92cb2d296ad2dbc.txt",
+    "line_number": 15,
+    "annotation": "4 0.059895833333333336 0.865234375 0 0",
+    "reason": "zero-area bounding box"
+  }
+]

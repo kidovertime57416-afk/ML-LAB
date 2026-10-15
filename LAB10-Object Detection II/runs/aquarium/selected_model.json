@@ -1,0 +1,13 @@
+{
+  "configuration": "img480_batch16",
+  "imgsz": 480,
+  "batch": 16,
+  "epochs": 10,
+  "precision": 0.5572716804705841,
+  "recall": 0.4935525644632938,
+  "mAP50": 0.5212333588479069,
+  "mAP50_95": 0.2926623319277385,
+  "run_dir": "runs/aquarium/comparisons/img480_batch16",
+  "weights": "runs/aquarium/comparisons/img480_batch16/weights/best.pt",
+  "selection_rule": "highest validation mAP50-95"
+}

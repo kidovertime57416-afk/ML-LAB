@@ -1,0 +1,54 @@
+{
+  "source": "https://www.kaggle.com/datasets/slavkoprytula/aquarium-data-cots",
+  "classes": [
+    "fish",
+    "jellyfish",
+    "penguin",
+    "puffin",
+    "shark",
+    "starfish",
+    "stingray"
+  ],
+  "splits": {
+    "train": {
+      "images": 448,
+      "boxes": 3324,
+      "boxes_per_class": {
+        "fish": 1961,
+        "puffin": 175,
+        "penguin": 330,
+        "starfish": 78,
+        "shark": 259,
+        "stingray": 136,
+        "jellyfish": 385
+      }
+    },
+    "valid": {
+      "images": 127,
+      "boxes": 909,
+      "boxes_per_class": {
+        "fish": 459,
+        "puffin": 74,
+        "penguin": 104,
+        "starfish": 27,
+        "shark": 57,
+        "stingray": 33,
+        "jellyfish": 155
+      }
+    },
+    "test": {
+      "images": 63,
+      "boxes": 582,
+      "boxes_per_class": {
+        "puffin": 35,
+        "penguin": 82,
+        "fish": 249,
+        "starfish": 11,
+        "shark": 36,
+        "jellyfish": 154,
+        "stingray": 15
+      }
+    }
+  },
+  "zero_area_annotations_removed": 2
+}

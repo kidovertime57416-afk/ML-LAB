@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.pt
+dataset/train/
+dataset/val/
+dataset/valid/
+dataset/test/
+dataset/label_backups/
+.ultralytics/
+# ผลจาก dataset เดิม
+runs/detect/
+runs/bdd100k/
+runs/evaluation/
+runs/image_test/
+runs/summary/

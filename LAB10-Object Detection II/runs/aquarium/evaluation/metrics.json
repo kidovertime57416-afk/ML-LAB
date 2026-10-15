@@ -1,0 +1,81 @@
+{
+  "split": "test",
+  "configuration": "img480_batch16",
+  "weights": "runs/aquarium/comparisons/img480_batch16/weights/best.pt",
+  "precision": 0.6435463098565821,
+  "recall": 0.5460620350709549,
+  "mAP50": 0.5491501068486226,
+  "mAP50_95": 0.335659733938947,
+  "per_class": [
+    {
+      "Class": "fish",
+      "Images": 30,
+      "Instances": 249,
+      "Box-P": 0.51669,
+      "Box-R": 0.48193,
+      "Box-F1": 0.4987,
+      "mAP50": 0.49646,
+      "mAP50-95": 0.27428
+    },
+    {
+      "Class": "jellyfish",
+      "Images": 11,
+      "Instances": 154,
+      "Box-P": 0.7113,
+      "Box-R": 0.83192,
+      "Box-F1": 0.7669,
+      "mAP50": 0.82066,
+      "mAP50-95": 0.48741
+    },
+    {
+      "Class": "penguin",
+      "Images": 7,
+      "Instances": 82,
+      "Box-P": 0.57913,
+      "Box-R": 0.52025,
+      "Box-F1": 0.54811,
+      "mAP50": 0.46194,
+      "mAP50-95": 0.1959
+    },
+    {
+      "Class": "puffin",
+      "Images": 6,
+      "Instances": 35,
+      "Box-P": 0.4347,
+      "Box-R": 0.14286,
+      "Box-F1": 0.21504,
+      "mAP50": 0.14666,
+      "mAP50-95": 0.05885
+    },
+    {
+      "Class": "shark",
+      "Images": 14,
+      "Instances": 36,
+      "Box-P": 0.56255,
+      "Box-R": 0.64308,
+      "Box-F1": 0.60013,
+      "mAP50": 0.65256,
+      "mAP50-95": 0.39629
+    },
+    {
+      "Class": "starfish",
+      "Images": 5,
+      "Instances": 11,
+      "Box-P": 1.0,
+      "Box-R": 0.53573,
+      "Box-F1": 0.69768,
+      "mAP50": 0.55184,
+      "mAP50-95": 0.38843
+    },
+    {
+      "Class": "stingray",
+      "Images": 10,
+      "Instances": 15,
+      "Box-P": 0.70045,
+      "Box-R": 0.66667,
+      "Box-F1": 0.68314,
+      "mAP50": 0.71393,
+      "mAP50-95": 0.54845
+    }
+  ]
+}
