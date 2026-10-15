@@ -1,0 +1,4 @@
+__pycache__/
+*.py[cod]
+mini-proj/outputs/*.keras
+mini-proj/outputs/*.npy

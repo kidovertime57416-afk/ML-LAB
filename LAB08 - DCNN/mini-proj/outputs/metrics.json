@@ -1,0 +1,54 @@
+{
+  "selection_rule": "highest validation accuracy, then lowest validation loss",
+  "selected_configuration": "vgg_6conv",
+  "selected_epoch": 50,
+  "selected_checkpoint": {
+    "configuration": "vgg_6conv",
+    "epochs": 50,
+    "train_accuracy": 1.0,
+    "train_loss": 0.00018708576681092381,
+    "val_accuracy": 0.95652174949646,
+    "val_loss": 0.13033075630664825,
+    "test_accuracy": 0.95652174949646,
+    "test_loss": 0.19552123546600342,
+    "seconds": 47.88069240000186
+  },
+  "test_accuracy": 0.9565217391304348,
+  "confusion_matrix": [
+    [
+      46,
+      0
+    ],
+    [
+      4,
+      42
+    ]
+  ],
+  "classification_report": {
+    "Lion": {
+      "precision": 0.92,
+      "recall": 1.0,
+      "f1-score": 0.9583333333333334,
+      "support": 46.0
+    },
+    "tiger": {
+      "precision": 1.0,
+      "recall": 0.9130434782608695,
+      "f1-score": 0.9545454545454546,
+      "support": 46.0
+    },
+    "accuracy": 0.9565217391304348,
+    "macro avg": {
+      "precision": 0.96,
+      "recall": 0.9565217391304348,
+      "f1-score": 0.956439393939394,
+      "support": 92.0
+    },
+    "weighted avg": {
+      "precision": 0.96,
+      "recall": 0.9565217391304348,
+      "f1-score": 0.956439393939394,
+      "support": 92.0
+    }
+  }
+}

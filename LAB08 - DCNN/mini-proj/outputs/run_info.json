@@ -1,0 +1,27 @@
+{
+  "data_path": "C:\\Users\\Kidovertime\\Desktop\\ML\\Github\\LAB07 - CNN\\Animal",
+  "classes": [
+    "Lion",
+    "tiger"
+  ],
+  "class_counts": {
+    "Lion": 230,
+    "tiger": 230
+  },
+  "image_size": 100,
+  "seed": 42,
+  "normalization": "Rescaling(1/255)",
+  "split_counts": {
+    "train": 322,
+    "validation": 46,
+    "test": 92
+  },
+  "config_epochs": 20,
+  "epoch_checkpoints": [
+    10,
+    20,
+    30,
+    50
+  ],
+  "batch_size": 32
+}
